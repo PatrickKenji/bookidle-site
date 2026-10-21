@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BookIdle — contas do pokeidle.io num só lugar</title>
+<meta name="description" content="BookIdle: gerenciador de contas e ferramentas para o pokeidle.io. Várias contas lado a lado, voto no TopIdle, bônus de live da Twitch, ranking de hunts e sniper do mercado. Gratuito e de código aberto, para Windows.">
+<meta name="theme-color" content="#1B1030">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/img/icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BookIdle — contas do pokeidle.io num só lugar">
+<meta property="og:description" content="Várias contas lado a lado, voto no TopIdle, bônus da Twitch, hunts e sniper do mercado. Gratuito e de código aberto.">
+<meta property="og:image" content="/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/PressStart2P-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/fonts/SpaceGrotesk-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+@font-face { font-family: "Press Start 2P"; src: url("/fonts/PressStart2P-Regular.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+
+:root {
+  --bg: #1B1030; --side: #24143F; --card: #2F1A52; --card-active: #4A2785; --pill: #3B2263; --field: #160C28; --outline: #120A22;
+  --purple: #C45CFF; --yellow: #FFD25A; --yellow-text: #3B1D00; --green: #5CFF9D; --orange: #FF8A3D; --blue: #4CC9F0; --pink: #FF6FB5;
+  --text: #F4ECFF; --muted: #C4B2E6; --checker-a: #27144A; --checker-b: #2D1850;
+  --pixel: "Press Start 2P", ui-monospace, monospace;
+  --sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gutter: clamp(16px, 5vw, 40px);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 18px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { /* xadrez do jogo, bem discreto */
+  content: ""; position: fixed; inset: 0; z-index: -1; opacity: .55;
+  background: conic-gradient(var(--checker-a) 25%, var(--checker-b) 0 50%, var(--checker-a) 0 75%, var(--checker-b) 0) 0 0 / 64px 64px;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--yellow); }
+a:hover { color: var(--green); }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+.wrap { width: min(1120px, 100% - 2 * var(--gutter)); margin-inline: auto; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--yellow); color: var(--yellow-text); padding: 8px 12px; z-index: 20; }
+.skip:focus { left: 8px; }
+
+/* ---- peças do visual "arcade": contorno escuro e sombra dura ---- */
+.pixel-box { background: var(--card); border: 3px solid var(--outline); box-shadow: 0 6px 0 var(--outline); border-radius: 10px; }
+h1, h2, h3, .pixel { font-family: var(--pixel); font-weight: 400; line-height: 1.5; letter-spacing: 0; margin: 0; }
+h2 { font-size: clamp(16px, 2.6vw, 22px); color: var(--yellow); text-transform: uppercase; }
+h3 { font-size: 13px; color: var(--text); text-transform: uppercase; }
+.lead { font-size: clamp(18px, 2.2vw, 21px); color: var(--muted); max-width: 62ch; }
+.muted { color: var(--muted); }
+section { padding-block: clamp(56px, 8vw, 96px); }
+.section-head { margin-bottom: 36px; display: grid; gap: 14px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 12px 22px;
+  font-family: var(--pixel); font-size: 12px; line-height: 1.4; text-decoration: none; text-transform: uppercase; cursor: pointer;
+  border: 3px solid var(--outline); border-radius: 10px; box-shadow: 0 5px 0 var(--outline);
+  transition: transform .08s ease, box-shadow .08s ease, filter .15s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--outline); filter: brightness(1.06); }
+.btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--outline); }
+.btn-primary { background: var(--yellow); color: var(--yellow-text); }
+.btn-primary:hover { color: var(--yellow-text); }
+.btn-secondary { background: var(--pill); color: var(--text); }
+.btn-secondary:hover { color: var(--text); }
+.btn-small { min-height: 42px; padding: 8px 14px; font-size: 10px; }
+
+/* ---- topo ---- */
+header.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 3px solid var(--outline); }
+.nav { display: flex; align-items: center; gap: 24px; min-height: 68px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
+.brand img { width: 44px; height: 32px; image-rendering: pixelated; }
+.brand span { font-family: var(--pixel); font-size: 13px; color: var(--yellow); }
+.nav a.link { color: var(--muted); text-decoration: none; font-weight: 700; font-size: 16px; }
+.nav a.link:hover { color: var(--text); }
+@media (max-width: 760px) { .nav a.link { display: none; } }
+
+/* ---- herói ---- */
+.hero { padding-top: clamp(40px, 6vw, 72px); }
+.hero-grid { display: grid; gap: 48px; grid-template-columns: 1fr; align-items: center; }
+@media (min-width: 980px) { .hero-grid { grid-template-columns: 1.1fr 1fr; } }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.badge { font-family: var(--pixel); font-size: 9px; line-height: 1.4; padding: 7px 9px; border: 3px solid var(--outline); border-radius: 8px; background: var(--pill); color: var(--text); text-transform: uppercase; }
+.badge.green { background: var(--green); color: #07301a; }
+.badge.purple { background: var(--purple); color: #2a0a40; }
+h1 { font-size: clamp(22px, 3.6vw, 36px); text-transform: uppercase; margin-bottom: 22px; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--yellow); }
+.hero .lead { margin-bottom: 28px; }
+.cta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; }
+.fineprint { font-size: 15px; color: var(--muted); max-width: 60ch; }
+.shot { display: block; border: 3px solid var(--outline); border-radius: 12px; box-shadow: 0 10px 0 var(--outline), 0 30px 80px rgba(196, 92, 255, .22); background: var(--field); overflow: hidden; }
+
+.only-banner { margin-top: 44px; display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: var(--card-active); }
+.only-banner .pixel { font-size: 11px; color: var(--yellow); white-space: nowrap; padding-top: 4px; }
+.only-banner p { margin: 0; }
+@media (max-width: 640px) { .only-banner { flex-direction: column; gap: 8px; } }
+
+/* ---- recursos ---- */
+.grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.card { padding: 24px; display: grid; gap: 12px; align-content: start; }
+.card .ico { width: 44px; height: 44px; border-radius: 8px; border: 3px solid var(--outline); display: grid; place-items: center; font-size: 22px; background: var(--pill); }
+.card p { margin: 0; color: var(--muted); font-size: 17px; }
+.card ul { margin: 0; padding-left: 20px; color: var(--muted); font-size: 16px; }
+.card li + li { margin-top: 4px; }
+.c1 .ico { background: var(--blue); } .c2 .ico { background: var(--yellow); } .c3 .ico { background: var(--purple); }
+.c4 .ico { background: var(--green); } .c5 .ico { background: var(--orange); } .c6 .ico { background: var(--pink); }
+.tag { display: inline-block; font-family: var(--pixel); font-size: 9px; padding: 5px 7px; border-radius: 6px; border: 2px solid var(--outline); background: var(--field); color: var(--green); vertical-align: middle; margin-left: 6px; }
+
+/* ---- telas ---- */
+.shots { display: grid; gap: 36px; }
+.shots figure { margin: 0; display: grid; gap: 14px; }
+.shots figcaption { color: var(--muted); font-size: 16px; }
+.shots figcaption strong { color: var(--text); }
+@media (min-width: 900px) { .shots { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+/* ---- faixas de destaque ---- */
+.band { background: var(--side); border-block: 3px solid var(--outline); }
+.two { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 900px) { .two { grid-template-columns: 1fr 1fr; } }
+.checks { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 14px; }
+.checks li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; color: var(--muted); }
+.checks li::before { content: "✓"; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 6px; background: var(--green); color: #07301a; font-weight: 700; border: 2px solid var(--outline); }
+.checks strong { color: var(--text); }
+.code-box { padding: 22px; font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 15px; color: var(--green); background: var(--field); overflow-x: auto; }
+.code-box .c { color: var(--muted); }
+
+/* ---- instalar ---- */
+.steps { counter-reset: s; list-style: none; padding: 0; margin: 0 0 32px; display: grid; gap: 18px; max-width: 760px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; }
+.steps li::before { content: counter(s); font-family: var(--pixel); font-size: 14px; display: grid; place-items: center; width: 44px; height: 44px; background: var(--yellow); color: var(--yellow-text); border: 3px solid var(--outline); border-radius: 8px; box-shadow: 0 4px 0 var(--outline); }
+.steps p { margin: 0; color: var(--muted); }
+.steps strong { color: var(--text); }
+.notice { padding: 18px 20px; border-left: 8px solid var(--orange); max-width: 760px; margin-top: 8px; }
+.notice p { margin: 0; color: var(--muted); font-size: 16px; }
+.notice strong { color: var(--text); }
+
+/* ---- faq ---- */
+details { padding: 0; margin-bottom: 14px; max-width: 860px; }
+summary { cursor: pointer; padding: 18px 22px; font-weight: 700; font-size: 18px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--pixel); color: var(--yellow); }
+details[open] summary::after { content: "–"; }
+details p { margin: 0; padding: 0 22px 20px; color: var(--muted); }
+
+footer { border-top: 3px solid var(--outline); background: var(--side); padding-block: 40px; }
+.foot { display: grid; gap: 22px; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.foot-links a { font-weight: 700; text-decoration: none; }
+.foot small { color: var(--muted); font-size: 14px; display: block; max-width: 80ch; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#recursos">Pular para o conteúdo</a>
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="BookIdle, início">
+      <img src="/img/LogoBookIdleMini.png" alt="" width="44" height="32">
+      <span>BookIdle</span>
+    </a>
+    <a class="link" href="#recursos">Recursos</a>
+    <a class="link" href="#privacidade">Privacidade</a>
+    <a class="link" href="#codigo-aberto">Código aberto</a>
+    <a class="link" href="#faq">Dúvidas</a>
+    <a class="btn btn-primary btn-small" href="https://github.com/PatrickKenji/BookIdle-releases/releases/latest/download/BookIdle-win-Setup.exe">Baixar</a>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="badges">
+            <span class="badge green">Gratuito</span>
+            <span class="badge purple">Código aberto · MIT</span>
+            <span class="badge">Windows 10 e 11</span>
+          </div>
+          <h1>Todas as suas contas do <em>Pokéidle</em> num só lugar</h1>
+          <p class="lead">O BookIdle abre várias contas do <strong>pokeidle.io</strong> lado a lado, lembra a hora de votar no TopIdle, mantém você presente nas lives de bônus da Twitch, mostra qual hunt rende mais e compra no mercado por você, tudo no seu computador.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="https://github.com/PatrickKenji/BookIdle-releases/releases/latest/download/BookIdle-win-Setup.exe">Baixar para Windows</a>
+            <a class="btn btn-secondary" href="https://github.com/PatrickKenji/BookIdle-releases">Ver no GitHub</a>
+          </div>
+          <p class="fineprint">Instalador de ~83 MB, sem pedir administrador. Atualiza sozinho. Projeto não oficial, sem ligação com o pokeidle.io.</p>
+        </div>
+        <div class="shot">
+          <img src="/img/janela-principal.png" width="1344" height="780" alt="Janela principal do BookIdle: lista de contas na lateral com botões de voto e Twitch, e o jogo aberto ao lado">
+        </div>
+      </div>
+
+      <div class="only-banner pixel-box" role="note">
+        <span class="pixel">POR ENQUANTO</span>
+        <p><strong>O BookIdle é só para o pokeidle.io.</strong> As ferramentas (voto, Twitch, hunts, sniper) foram feitas para ele. Se o pessoal quiser, vamos trabalhar em ferramentas para <strong>outros jogos idle</strong>. <a href="https://github.com/PatrickKenji/BookIdle-releases/discussions">Diga qual jogo você quer</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="recursos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Tudo para o pokeidle.io</h2>
+        <p class="lead">Pense nele como o painel de controle das suas contas.</p>
+      </div>
+      <div class="grid">
+        <article class="card pixel-box c1">
+          <div class="ico" aria-hidden="true">🗂️</div>
+          <h3>Contas lado a lado</h3>
+          <p>Cada conta tem o próprio navegador isolado, então as sessões não se misturam.</p>
+          <ul>
+            <li>4 modos de janela: Abas, Grade, 1+N e Livre</li>
+            <li>Arraste para reordenar; mute por conta</li>
+            <li>Mostra a memória de cada conta e recarrega a que passar do limite</li>
+            <li>Vai para a bandeja e pode iniciar com o Windows</li>
+          </ul>
+        </article>
+        <article class="card pixel-box c2">
+          <div class="ico" aria-hidden="true">🗳️</div>
+          <h3>Votar no TopIdle</h3>
+          <p>Um botão por conta abre a página de voto com a sessão daquela conta e mostra <strong>quanto falta</strong> para votar de novo. Fica amarelo quando já dá. Você vota; o app não clica por você.</p>
+        </article>
+        <article class="card pixel-box c3">
+          <div class="ico" aria-hidden="true">📺</div>
+          <h3>Bônus de live da Twitch</h3>
+          <p>Cada conta fica presente no chat dos canais de bônus <strong>sem você abrir nenhuma live</strong> e sem gastar a memória de um navegador por canal.</p>
+        </article>
+        <article class="card pixel-box c4">
+          <div class="ico" aria-hidden="true">📈</div>
+          <h3>/hunt<span class="tag">XP e ouro</span></h3>
+          <p>Para o Pokémon em campo de cada conta, mostra as melhores hunts por <strong>XP/h</strong> e por <strong>ouro/h líquido</strong>, com o risco de cada uma. Usa as fórmulas do próprio jogo, ao vivo, e entende o dia sazonal.</p>
+        </article>
+        <article class="card pixel-box c5">
+          <div class="ico" aria-hidden="true">🎯</div>
+          <h3>Sniper do mercado</h3>
+          <p>Compra em segundo plano o que bate com as suas regras.</p>
+          <ul>
+            <li>Até 15 regras por conta, com teto em coins e em gemas</li>
+            <li>Radar de shiny, P5 e nota mínima</li>
+            <li>Reserva de saldo que nunca é gasta</li>
+            <li>Respeita a retenção e o sorteio do mercado</li>
+          </ul>
+        </article>
+        <article class="card pixel-box c6">
+          <div class="ico" aria-hidden="true">🔄</div>
+          <h3>Atualiza sozinho</h3>
+          <p>O app confere versões novas ao abrir e de hora em hora, avisa e atualiza com um clique, baixando só o que mudou.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="telas" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Como é por dentro</h2>
+        <p class="lead">Capturas com dados de exemplo. Clique para ampliar.</p>
+      </div>
+      <div class="shots">
+        <figure>
+          <a class="shot" href="/img/hunt.png" target="_blank" rel="noopener" aria-label="Abrir a captura do /hunt em tamanho grande"><img loading="lazy" src="/img/hunt.png" width="1208" height="788" alt="Painel do /hunt com a melhor hunt de cada conta e o ranking por XP por hora e ouro por hora"></a>
+          <figcaption><strong>/hunt:</strong> a melhor hunt de cada conta e o ranking completo por XP/h ou ouro/h líquido.</figcaption>
+        </figure>
+        <figure>
+          <a class="shot" href="/img/sniper.png" target="_blank" rel="noopener" aria-label="Abrir a captura do Sniper em tamanho grande"><img loading="lazy" src="/img/sniper.png" width="1208" height="788" alt="Painel do Sniper com nova regra de compra, radar de Pokémon, regras ativas, proteção de saldo e feed de eventos"></a>
+          <figcaption><strong>Sniper:</strong> regras por conta, radar de Pokémon, proteção de saldo e feed de eventos.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacidade">
+    <div class="wrap two">
+      <div>
+        <div class="section-head">
+          <h2>Seus dados ficam com você</h2>
+          <p class="lead"><strong>Nós não temos acesso às suas contas, senhas nem dados.</strong> Não existe servidor nosso: o BookIdle roda inteiro no seu computador e nada é enviado para nós.</p>
+        </div>
+        <ul class="checks">
+          <li><span><strong>Tudo fica no seu PC.</strong> Configurações, regras, logins e senhas são guardados só na sua máquina.</span></li>
+          <li><span><strong>Navegador isolado por conta.</strong> Sessões e cookies de uma conta não se misturam com as outras nem com o seu navegador.</span></li>
+          <li><span><strong>Cofre de senhas opcional e criptografado</strong>, com o seu usuário do Windows ou com uma senha mestra.</span></li>
+          <li><span><strong>Sem telemetria.</strong> Sem análise de uso e sem relatório de erros enviado.</span></li>
+        </ul>
+      </div>
+      <div class="pixel-box" style="padding:24px">
+        <h3 style="margin-bottom:14px;color:var(--yellow)">Com quem o app conversa</h3>
+        <p class="muted" style="margin:0 0 14px">Só com estes endereços, e você pode conferir no código:</p>
+        <div class="code-box pixel-box">
+pokeidle.io<span class="c">   · o jogo e a lista de itens</span><br>
+topidle.com<span class="c">   · a página de voto</span><br>
+twitch.tv<span class="c">     · só se você conectar a Twitch</span><br>
+github.com<span class="c">    · conferir e baixar atualizações</span><br>
+livepix.gg<span class="c">    · só se você clicar em Apoiar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="codigo-aberto" class="band">
+    <div class="wrap two">
+      <div>
+        <div class="section-head">
+          <h2>Código aberto</h2>
+          <p class="lead">O BookIdle é <strong>software livre sob a licença MIT</strong>. Qualquer pessoa pode ler, conferir, copiar e modificar o código para uso próprio.</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn-secondary" href="https://github.com/PatrickKenji/BookIdle-releases">Código no GitHub</a>
+          <a class="btn btn-secondary" href="https://github.com/PatrickKenji/BookIdle-releases/issues">Sugestões e bugs</a>
+        </div>
+      </div>
+      <ul class="checks" style="margin-top:0">
+        <li><span><strong>Transparência:</strong> você não precisa confiar na nossa palavra sobre privacidade, o código está lá para ler.</span></li>
+        <li><span><strong>Atualizações seguras:</strong> só quem mantém o projeto altera o código e publica versões; pull requests de fora ficam desligados.</span></li>
+        <li><span><strong>Baixe só do GitHub oficial</strong> (o link do botão), nunca de outros sites.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="instalar">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Como instalar</h2>
+        <p class="lead">Leva um minuto. Precisa do Windows 10 ou 11.</p>
+      </div>
+      <ol class="steps">
+        <li><p><strong>Baixe o instalador</strong> pelo botão abaixo (também há todas as versões em <a href="https://github.com/PatrickKenji/BookIdle-releases/releases">Releases</a>).</p></li>
+        <li><p><strong>Rode o instalador.</strong> Ele instala só para o seu usuário, sem pedir administrador, e coloca o WebView2 se faltar.</p></li>
+        <li><p><strong>Abra, crie as contas</strong> e jogue. As atualizações chegam sozinhas.</p></li>
+      </ol>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/PatrickKenji/BookIdle-releases/releases/latest/download/BookIdle-win-Setup.exe">Baixar BookIdle</a>
+        <a class="btn btn-secondary" href="https://github.com/PatrickKenji/BookIdle-releases/releases/latest">Notas da versão</a>
+      </div>
+      <div class="notice pixel-box" role="note">
+        <p><strong>"O Windows protegeu seu PC"?</strong> É normal na primeira vez: o instalador ainda não tem assinatura digital paga. Clique em <strong>Mais informações → Executar assim mesmo</strong>. Se preferir, o código está aberto para você conferir e compilar sozinho.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="band">
+    <div class="wrap">
+      <div class="section-head"><h2>Dúvidas</h2></div>
+      <details class="pixel-box">
+        <summary>É oficial? Vocês têm ligação com o pokeidle.io?</summary>
+        <p>Não. O BookIdle é um projeto independente, sem ligação com o pokeidle.io, o TopIdle, a Twitch, a Nintendo ou a The Pokémon Company. Todas as marcas são dos respectivos donos.</p>
+      </details>
+      <details class="pixel-box">
+        <summary>Posso ser banido por usar?</summary>
+        <p>O jogo permite automação que siga as mesmas regras de quem joga na mão, e o sniper foi feito assim. Mas <strong>o limite de contas é seu</strong>: o pokeidle.io permite hoje 4 contas por pessoa, somando todos os computadores e redes. Leia os termos do jogo; você é responsável pelo uso.</p>
+      </details>
+      <details class="pixel-box">
+        <summary>O sniper gasta moedas de verdade?</summary>
+        <p>Sim, gasta coins e gemas do jogo. Comece com regras pequenas e uma reserva de saldo alta, e acompanhe o feed de eventos. Uma compra feita não é desfeita pelo jogo.</p>
+      </details>
+      <details class="pixel-box">
+        <summary>Funciona para outros jogos idle?</summary>
+        <p>O BookIdle abre qualquer jogo web em perfis separados, então já serve como gerenciador de várias contas. Mas as ferramentas especiais (voto, hunts, sniper, Twitch) são só do pokeidle.io. <a href="https://github.com/PatrickKenji/BookIdle-releases/discussions">Conte qual jogo você quer</a> e vamos avaliar.</p>
+      </details>
+      <details class="pixel-box">
+        <summary>Tem custo? Como ajudar?</summary>
+        <p>É gratuito. Se quiser ajudar, o botão <a href="https://livepix.gg/tickelicia">♥ Apoiar</a> leva à página de apoio. Não é obrigatório e nada é bloqueado para quem não apoia.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-links">
+      <a href="https://github.com/PatrickKenji/BookIdle-releases">GitHub</a>
+      <a href="https://github.com/PatrickKenji/BookIdle-releases/releases">Versões</a>
+      <a href="https://github.com/PatrickKenji/BookIdle-releases/issues">Reportar problema</a>
+      <a href="https://github.com/PatrickKenji/BookIdle-releases/blob/main/LICENSE">Licença MIT</a>
+      <a href="https://livepix.gg/tickelicia">♥ Apoiar</a>
+    </div>
+    <small>© 2026 Tickelicia. BookIdle é software livre (MIT), fornecido "como está", sem garantias. Projeto não oficial: não tem ligação com o pokeidle.io, o TopIdle, a Twitch, a Nintendo ou a The Pokémon Company; todas as marcas pertencem aos seus donos. Fontes Press Start 2P e Space Grotesk sob licença OFL.</small>
+  </div>
+</footer>
+</body>
+</html>
