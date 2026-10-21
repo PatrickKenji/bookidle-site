@@ -11,4 +11,4 @@ python -m http.server 8765   # e abra http://localhost:8765
 
 Na Vercel: importe este repositório como projeto **Other**, sem comando de build e com a raiz como diretório de saída.
 
-As fontes (Press Start 2P e Space Grotesk) são licenciadas sob a OFL; os textos de licença estão em `fonts/`.
+A fonte Space Grotesk é licenciada sob a OFL; o texto da licença está em `fonts/`.
