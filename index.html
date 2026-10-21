@@ -243,7 +243,6 @@ footer a:hover { color: var(--yellow); }
           <button type="button" role="radio" aria-checked="false" data-mode="abas">Abas</button>
           <button type="button" role="radio" aria-checked="true" data-mode="grade">Grade</button>
           <button type="button" role="radio" aria-checked="false" data-mode="1n">1+N</button>
-          <button type="button" role="radio" aria-checked="false" data-mode="livre">Livre</button>
         </div>
         <p class="mode-note" id="mode-note" aria-live="polite">Quatro contas em 2×2, todas visíveis ao mesmo tempo.</p>
       </div>
@@ -449,8 +448,7 @@ footer a:hover { color: var(--yellow); }
   var layouts = {
     abas:  { note: 'Uma conta por vez, em tela cheia. Troque pelas abas no alto.', r: [[0, 14, 100, 86], [0, 0, 24, 10], [25, 0, 24, 10], [50, 0, 24, 10]] },
     grade: { note: 'Quatro contas em 2×2, todas visíveis ao mesmo tempo.', r: [[0, 0, 49, 49], [51, 0, 49, 49], [0, 51, 49, 49], [51, 51, 49, 49]] },
-    '1n':  { note: 'Uma conta grande para você jogar e as outras pequenas, de olho.', r: [[0, 0, 66, 100], [68, 0, 32, 32], [68, 34, 32, 32], [68, 68, 32, 32]] },
-    livre: { note: 'Arraste e redimensione cada janela como quiser, sem sobreposição.', r: [[0, 0, 38, 58], [40, 0, 60, 38], [0, 60, 50, 40], [52, 40, 48, 60]] }
+    '1n':  { note: 'Uma conta grande para você jogar e as outras pequenas, de olho.', r: [[0, 0, 66, 100], [68, 0, 32, 32], [68, 34, 32, 32], [68, 68, 32, 32]] }
   };
   var stage = document.getElementById('stage');
   var note = document.getElementById('mode-note');
