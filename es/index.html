@@ -19,16 +19,18 @@
 <meta property="og:description" content="Varias cuentas de juegos idle lado a lado, con herramientas hechas a medida para algunos juegos. Gratuito y de código abierto.">
 <meta property="og:image" content="/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="/fonts/BricolageGrotesque.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/fonts/SpaceGrotesk-Bold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/fonts/SpaceGrotesk-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <style>
-@font-face { font-family: "Bricolage Grotesque"; src: url("/fonts/BricolageGrotesque.ttf") format("truetype"); font-weight: 200 800; font-stretch: 75% 100%; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("/fonts/SpaceGrotesk-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
 
 :root {
   --paper: #F7F2FF; --panel: #ECE3FF; --panel-2: #E0D3FB; --ink: #1B1030; --ink-soft: #54426F; --line: #D5C6F0;
   --violet: #7B2FD6; --violet-bright: #C45CFF; --yellow: #FFD25A; --yellow-ink: #3B1D00; --green: #167A47;
   --night: #17092B; --night-2: #241341; --night-3: #2E1A55; --night-text: #F4ECFF; --night-soft: #C4B2E6; --night-line: #3d2862;
   --acc-1: #4CC9F0; --acc-2: #5CFF9D; --acc-3: #9B6BFF; --acc-4: #FF8A3D;
-  --sans: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   --gutter: clamp(20px, 5vw, 48px);
   --section: clamp(72px, 10vw, 136px);
   --lap: clamp(48px, 8vw, 112px);
@@ -48,10 +50,10 @@ a:hover { color: var(--ink); }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff; padding: 8px 12px; z-index: 30; border-radius: 6px; }
 .skip:focus { left: 8px; }
 
-h1, h2, h3 { margin: 0; font-weight: 800; font-stretch: 100%; letter-spacing: -0.03em; text-wrap: balance; }
-h1 { font-size: clamp(46px, 6.8vw, 96px); line-height: .95; }
+h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.035em; text-wrap: balance; }
+h1 { font-size: clamp(42px, 5.8vw, 82px); line-height: 1; }
 h2 { font-size: clamp(36px, 5vw, 64px); line-height: 1; }
-h3 { font-size: 23px; line-height: 1.2; letter-spacing: -0.015em; font-stretch: 94%; font-weight: 700; }
+h3 { font-size: 23px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 700; }
 p { margin: 0; text-wrap: pretty; }
 .lead { font-size: clamp(19px, 2vw, 22px); color: var(--ink-soft); max-width: 58ch; line-height: 1.55; }
 .dark .lead { color: var(--night-soft); }
@@ -76,7 +78,7 @@ p { margin: 0; text-wrap: pretty; }
 /* ---- topo (escuro, como o app) + marcador de pagina ---- */
 header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--night) 84%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(196,178,230,.14); transition: box-shadow .25s ease; }
 .nav { display: flex; align-items: center; gap: clamp(16px, 3vw, 32px); min-height: 68px; padding-right: 96px; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; color: var(--night-text); font-weight: 800; font-size: 21px; letter-spacing: -0.03em; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; color: var(--night-text); font-weight: 700; font-size: 21px; letter-spacing: -0.03em; }
 .brand:hover { color: var(--night-text); }
 .brand img { width: 44px; height: 32px; image-rendering: pixelated; }
 .nav a.link { color: var(--night-soft); text-decoration: none; font-weight: 600; font-size: 16px; }
@@ -98,7 +100,7 @@ header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srg
 .hero::before { content: ""; position: absolute; inset: 0 -10% 0 -10%; z-index: -1; pointer-events: none; background: radial-gradient(50% 55% at 78% 62%, rgba(123,47,214,.55), transparent 72%), radial-gradient(36% 42% at 6% 4%, rgba(196,92,255,.2), transparent 70%), radial-gradient(40% 30% at 50% 100%, rgba(196,92,255,.25), transparent 75%); }
 .hero-grid { display: grid; gap: 26px clamp(32px, 6vw, 88px); align-items: start; }
 @media (min-width: 940px) { .hero-grid { grid-template-columns: 1fr 1fr; } .hero-side { padding-top: .6em; } }
-.hero h1 { max-width: 11ch; color: var(--night-text); }
+.hero h1 { max-width: 13ch; color: var(--night-text); }
 .hero-side { display: grid; gap: 0; justify-items: start; }
 .hero .lead { color: var(--night-soft); }
 .hero .row { margin-top: 28px; }
@@ -123,7 +125,7 @@ header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srg
 .app-side { padding: 14px; background: #1c0f33; display: grid; align-content: start; gap: 9px; }
 .acc { display: grid; grid-template-columns: 34px 1fr auto; column-gap: 10px; row-gap: 3px; align-items: center; padding: 10px; border-radius: 12px; background: #261547; }
 .acc.on { background: #3a2070; box-shadow: inset 0 0 0 1px var(--yellow); }
-.av { grid-row: span 2; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-size: 12px; color: var(--ink); background: var(--c); }
+.av { grid-row: span 2; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-weight: 700; font-size: 12px; color: var(--ink); background: var(--c); }
 .acc strong { font-size: 13px; line-height: 1.1; font-weight: 700; }
 .acc em { font-style: normal; font-size: 11px; color: var(--night-soft); }
 .acc span { grid-column: 2; font-size: 11px; color: var(--acc-2); line-height: 1.1; }
@@ -144,7 +146,7 @@ header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srg
 .pane:nth-child(3) { --c: var(--acc-3); --p: 2; } .pane:nth-child(4) { --c: var(--acc-4); --p: 3; }
 @keyframes pop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
 .pane-bar { display: flex; align-items: center; gap: 7px; padding: 0 10px; font-size: 11.5px; background: var(--c); color: var(--ink); white-space: nowrap; }
-.pane-bar b { font-weight: 800; }
+.pane-bar b { font-weight: 700; }
 .pane-bar i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
 .pane-bar span { margin-left: auto; font-weight: 600; }
 .pane-body { position: relative; background-color: color-mix(in srgb, var(--c) 26%, #120a22); background-image: conic-gradient(rgba(255,255,255,.07) 25%, transparent 0 50%, rgba(255,255,255,.07) 0 75%, transparent 0); background-size: 28px 28px; }
@@ -186,7 +188,7 @@ header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srg
 .game { margin-top: clamp(40px, 6vw, 72px); display: grid; gap: clamp(36px, 5vw, 72px); grid-template-columns: 1fr; align-items: start; }
 @media (min-width: 940px) { .game { grid-template-columns: 1fr 1.05fr; } }
 .game-name { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.game-name h3 { font-size: clamp(30px, 3.6vw, 44px); font-stretch: 86%; font-weight: 800; }
+.game-name h3 { font-size: clamp(30px, 3.6vw, 44px); font-weight: 700; }
 .status { font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: var(--green); color: #fff; }
 .tools { list-style: none; margin: 26px 0 0; padding: 0; display: grid; }
 .tools li { display: grid; gap: 4px; padding-block: 18px; border-top: 1px solid var(--line); }
@@ -201,7 +203,7 @@ header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srg
 @media (min-width: 940px) { .shots figure:nth-child(2) { margin-left: 56px; } .shots figure:nth-child(1) { margin-right: 56px; } }
 .shots figcaption { margin-top: 10px; font-size: 15px; color: var(--ink-soft); }
 .wanted { margin-top: clamp(48px, 7vw, 88px); padding: clamp(28px, 4vw, 44px); border-radius: 16px; background: var(--paper); display: grid; gap: 18px; justify-items: start; }
-.wanted h3 { font-size: clamp(26px, 3vw, 34px); font-stretch: 88%; font-weight: 800; }
+.wanted h3 { font-size: clamp(26px, 3vw, 34px); font-weight: 700; }
 .wanted p { color: var(--ink-soft); max-width: 62ch; }
 .indep { margin-top: 32px; font-size: 15px; color: var(--ink-soft); max-width: 78ch; }
 
@@ -246,8 +248,8 @@ header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srg
 .steps { list-style: none; margin: clamp(36px, 5vw, 56px) 0 0; padding: 0; display: grid; gap: 28px; counter-reset: s; grid-template-columns: 1fr; }
 @media (min-width: 860px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
 .steps li { counter-increment: s; display: grid; gap: 10px; align-content: start; }
-.steps li::before { content: counter(s); display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--ink); color: var(--yellow); font-weight: 800; font-size: 24px; }
-.steps strong { font-size: 22px; letter-spacing: -0.02em; font-weight: 800; }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--ink); color: var(--yellow); font-weight: 700; font-size: 24px; }
+.steps strong { font-size: 22px; letter-spacing: -0.02em; font-weight: 700; }
 .steps p { color: rgba(59,29,0,.82); }
 .install-cta { margin-top: clamp(36px, 5vw, 56px); }
 .notice { margin-top: 40px; padding: 22px 26px; background: rgba(255,255,255,.55); border: 1px solid rgba(59,29,0,.18); border-radius: 14px; max-width: 760px; color: rgba(59,29,0,.86); font-size: 16px; }
@@ -569,7 +571,7 @@ footer a:hover { color: var(--yellow); }
       <a href="https://github.com/PatrickKenji/BookIdle-releases/blob/main/LICENSE">Licencia MIT</a>
       <a href="https://livepix.gg/tickelicia">Apoyar</a>
     </div>
-    <small>© 2026 Tickelicia. BookIdle es software libre (MIT), ofrecido "tal cual", sin garantías. Proyecto independiente: no tiene ningún vínculo con pokeidle.io ni con los demás juegos abiertos en él, ni con TopIdle, Twitch, Nintendo ni The Pokémon Company; todas las marcas pertenecen a sus dueños. Fuente Bricolage Grotesque bajo licencia OFL.</small>
+    <small>© 2026 Tickelicia. BookIdle es software libre (MIT), ofrecido "tal cual", sin garantías. Proyecto independiente: no tiene ningún vínculo con pokeidle.io ni con los demás juegos abiertos en él, ni con TopIdle, Twitch, Nintendo ni The Pokémon Company; todas las marcas pertenecen a sus dueños. Fuente Space Grotesk bajo licencia OFL.</small>
   </div>
 </footer>
 
