@@ -33,7 +33,7 @@
   --sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   --gutter: clamp(20px, 5vw, 48px);
   --section: clamp(72px, 10vw, 136px);
-  --lap: clamp(48px, 8vw, 112px);
+  --lap: clamp(36px, 6vw, 84px);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -98,15 +98,15 @@ header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srg
 /* ---- heroi: escuro, com o app montando na tela ---- */
 .hero { position: relative; isolation: isolate; overflow-x: clip; background: var(--night); color: var(--night-text); padding-top: clamp(44px, 7vw, 96px); }
 .hero::before { content: ""; position: absolute; inset: 0 -10% 0 -10%; z-index: -1; pointer-events: none; background: radial-gradient(50% 55% at 78% 62%, rgba(123,47,214,.55), transparent 72%), radial-gradient(36% 42% at 6% 4%, rgba(196,92,255,.2), transparent 70%), radial-gradient(40% 30% at 50% 100%, rgba(196,92,255,.25), transparent 75%); }
-.hero-grid { display: grid; gap: 26px clamp(32px, 6vw, 88px); align-items: start; }
-@media (min-width: 940px) { .hero-grid { grid-template-columns: 1fr 1fr; } .hero-side { padding-top: .6em; } }
-.hero h1 { max-width: 13ch; color: var(--night-text); }
-.hero-side { display: grid; gap: 0; justify-items: start; }
+.hero h1 { max-width: 20ch; font-size: clamp(42px, 7.2vw, 92px); line-height: 1.02; color: var(--night-text); }
+.hero-cols { display: grid; gap: 28px clamp(32px, 6vw, 88px); align-items: start; margin-top: clamp(28px, 4vw, 52px); }
+@media (min-width: 940px) { .hero-cols { grid-template-columns: 1.15fr 1fr; } }
+.hero-main, .hero-side { display: grid; justify-items: start; align-content: start; }
 .hero .lead { color: var(--night-soft); }
 .hero .row { margin-top: 28px; }
 .hero .btn-quiet { color: var(--night-text); text-decoration-color: var(--violet-bright); }
 .hero .btn-quiet:hover { color: var(--yellow); }
-.oss { display: flex; align-items: center; gap: 14px; margin-top: 26px; padding: 12px 18px 12px 12px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(196,178,230,.24); color: var(--night-text); text-decoration: none; transition: transform .16s var(--ease-out), border-color .2s ease, background-color .2s ease; }
+.oss { display: flex; align-items: center; gap: 14px; padding: 14px 20px 14px 14px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(196,178,230,.24); color: var(--night-text); text-decoration: none; transition: transform .16s var(--ease-out), border-color .2s ease, background-color .2s ease; }
 .oss .ico { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 11px; background: rgba(92,255,157,.16); color: var(--acc-2); }
 .oss .ico svg { width: 22px; height: 22px; }
 .oss-text { display: grid; gap: 1px; font-size: 14px; line-height: 1.35; color: var(--night-soft); }
@@ -115,7 +115,7 @@ header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srg
 .oss:active { transform: scale(.98); }
 .facts { margin-top: 18px; font-size: 15px; color: var(--night-soft); max-width: 46ch; }
 
-.hero-demo { position: relative; z-index: 2; margin-top: clamp(20px, 3vw, 44px); translate: 0 var(--lap); }
+.hero-demo { position: relative; z-index: 2; margin-top: clamp(4px, 1vw, 12px); translate: 0 var(--lap); }
 .hero + .section { padding-top: calc(var(--section) + var(--lap)); }
 .app { position: relative; aspect-ratio: 16 / 9.4; border-radius: 18px; background: #120A22; box-shadow: 0 0 0 1px rgba(196,178,230,.18), 0 60px 100px -34px rgba(12,4,28,.8), 0 24px 48px -24px rgba(0,0,0,.6); overflow: hidden; display: grid; grid-template-rows: 34px 1fr; }
 .app-bar { display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #1a0d30; font-size: 12px; font-weight: 600; color: var(--night-soft); }
@@ -320,9 +320,9 @@ footer a:hover { color: var(--yellow); }
 <main id="conteudo">
   <section class="hero">
     <div class="wrap">
-      <div class="hero-grid">
-        <h1 class="rise">Suas contas de jogos idle, num só lugar.</h1>
-        <div class="hero-side">
+      <h1 class="rise">Suas contas de jogos idle, num só lugar.</h1>
+      <div class="hero-cols">
+        <div class="hero-main">
           <p class="lead rise" style="--d:1">O BookIdle abre cada conta num navegador isolado, organiza as janelas e cuida da memória. Para alguns jogos, vai além, com ferramentas feitas sob medida.</p>
           <div class="row rise" style="--d:2">
             <a class="btn btn-yellow" href="https://github.com/PatrickKenji/BookIdle-releases/releases/latest/download/BookIdle-win-Setup.exe">
@@ -331,6 +331,8 @@ footer a:hover { color: var(--yellow); }
             </a>
             <a class="btn btn-quiet" href="https://github.com/PatrickKenji/BookIdle-releases">Ver o código no GitHub</a>
           </div>
+        </div>
+        <div class="hero-side">
           <a class="oss rise" style="--d:3" href="https://github.com/PatrickKenji/BookIdle-releases">
             <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span>
             <span class="oss-text"><strong>Projeto de código aberto</strong><span>Licença MIT. Qualquer pessoa pode ler, conferir e modificar o código.</span></span>
