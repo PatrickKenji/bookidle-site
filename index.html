@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BookIdle — contas do pokeidle.io num só lugar</title>
-<meta name="description" content="BookIdle: gerenciador de contas e ferramentas para o pokeidle.io. Várias contas lado a lado, voto no TopIdle, bônus de live da Twitch, ranking de hunts e sniper do mercado. Gratuito e de código aberto, para Windows.">
+<title>BookIdle — gerenciador de contas para jogos idle</title>
+<meta name="description" content="BookIdle: gerenciador de contas para jogos idle. Várias contas lado a lado, cada uma num navegador isolado, com ferramentas personalizadas por jogo (hoje, para o pokeidle.io). Gratuito e de código aberto, para Windows.">
 <meta name="theme-color" content="#1B1030">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/img/icon-192.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="BookIdle — contas do pokeidle.io num só lugar">
-<meta property="og:description" content="Várias contas lado a lado, voto no TopIdle, bônus da Twitch, hunts e sniper do mercado. Gratuito e de código aberto.">
+<meta property="og:title" content="BookIdle — gerenciador de contas para jogos idle">
+<meta property="og:description" content="Várias contas de jogos idle lado a lado, com ferramentas personalizadas por jogo. Gratuito e de código aberto.">
 <meta property="og:image" content="/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/fonts/PressStart2P-Regular.ttf" as="font" type="font/ttf" crossorigin>
@@ -108,7 +108,10 @@ h1 em { font-style: normal; color: var(--yellow); }
 .card ul { margin: 0; padding-left: 20px; color: var(--muted); font-size: 16px; }
 .card li + li { margin-top: 4px; }
 .c1 .ico { background: var(--blue); } .c2 .ico { background: var(--yellow); } .c3 .ico { background: var(--purple); }
-.c4 .ico { background: var(--green); } .c5 .ico { background: var(--orange); } .c6 .ico { background: var(--pink); }
+.c4 .ico { background: var(--green); }
+.grid.four, .grid.games { grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); }
+.grid.games { align-items: stretch; }
+.dashed { border-style: dashed; background: transparent; box-shadow: none; } .c5 .ico { background: var(--orange); } .c6 .ico { background: var(--pink); }
 .tag { display: inline-block; font-family: var(--pixel); font-size: 9px; padding: 5px 7px; border-radius: 6px; border: 2px solid var(--outline); background: var(--field); color: var(--green); vertical-align: middle; margin-left: 6px; }
 
 /* ---- telas ---- */
@@ -166,6 +169,7 @@ footer { border-top: 3px solid var(--outline); background: var(--side); padding-
       <span>BookIdle</span>
     </a>
     <a class="link" href="#recursos">Recursos</a>
+    <a class="link" href="#jogos">Jogos</a>
     <a class="link" href="#privacidade">Privacidade</a>
     <a class="link" href="#codigo-aberto">Código aberto</a>
     <a class="link" href="#faq">Dúvidas</a>
@@ -183,22 +187,22 @@ footer { border-top: 3px solid var(--outline); background: var(--side); padding-
             <span class="badge purple">Código aberto · MIT</span>
             <span class="badge">Windows 10 e 11</span>
           </div>
-          <h1>Todas as suas contas do <em>Pokéidle</em> num só lugar</h1>
-          <p class="lead">O BookIdle abre várias contas do <strong>pokeidle.io</strong> lado a lado, lembra a hora de votar no TopIdle, mantém você presente nas lives de bônus da Twitch, mostra qual hunt rende mais e compra no mercado por você, tudo no seu computador.</p>
+          <h1>Todas as suas contas de <em>jogos idle</em> num só lugar</h1>
+          <p class="lead">O BookIdle abre várias contas lado a lado, cada uma num navegador isolado, com janelas organizadas, memória sob controle e atualização automática. Quando um jogo tem ferramentas feitas sob medida, elas aparecem aqui, no seu computador.</p>
           <div class="cta">
             <a class="btn btn-primary" href="https://github.com/PatrickKenji/BookIdle-releases/releases/latest/download/BookIdle-win-Setup.exe">Baixar para Windows</a>
             <a class="btn btn-secondary" href="https://github.com/PatrickKenji/BookIdle-releases">Ver no GitHub</a>
           </div>
-          <p class="fineprint">Instalador de ~83 MB, sem pedir administrador. Atualiza sozinho. Projeto não oficial, sem ligação com o pokeidle.io.</p>
+          <p class="fineprint">Instalador de ~83 MB, sem pedir administrador. Atualiza sozinho. Projeto independente, sem ligação com nenhum dos jogos.</p>
         </div>
         <div class="shot">
-          <img src="/img/janela-principal.png" width="1344" height="780" alt="Janela principal do BookIdle: lista de contas na lateral com botões de voto e Twitch, e o jogo aberto ao lado">
+          <img src="/img/janela-principal.png" width="1344" height="780" alt="Janela principal do BookIdle: lista de contas na lateral e o jogo aberto ao lado">
         </div>
       </div>
 
       <div class="only-banner pixel-box" role="note">
-        <span class="pixel">POR ENQUANTO</span>
-        <p><strong>O BookIdle é só para o pokeidle.io.</strong> As ferramentas (voto, Twitch, hunts, sniper) foram feitas para ele. Se o pessoal quiser, vamos trabalhar em ferramentas para <strong>outros jogos idle</strong>. <a href="https://github.com/PatrickKenji/BookIdle-releases/discussions">Diga qual jogo você quer</a>.</p>
+        <span class="pixel">EM EVOLUÇÃO</span>
+        <p><strong>O BookIdle é um gerenciador para vários jogos idle.</strong> As ferramentas personalizadas por jogo são criadas conforme a necessidade de quem joga. <strong>Hoje temos suporte personalizado para o pokeidle.io</strong>; os próximos dependem de você. <a href="#jogos">Veja os jogos</a>.</p>
       </div>
     </div>
   </section>
@@ -206,61 +210,79 @@ footer { border-top: 3px solid var(--outline); background: var(--side); padding-
   <section id="recursos">
     <div class="wrap">
       <div class="section-head">
-        <h2>Tudo para o pokeidle.io</h2>
-        <p class="lead">Pense nele como o painel de controle das suas contas.</p>
+        <h2>Para qualquer jogo idle</h2>
+        <p class="lead">O painel de controle das suas contas, seja qual for o jogo de navegador.</p>
       </div>
-      <div class="grid">
+      <div class="grid four">
         <article class="card pixel-box c1">
           <div class="ico" aria-hidden="true">🗂️</div>
           <h3>Contas lado a lado</h3>
-          <p>Cada conta tem o próprio navegador isolado, então as sessões não se misturam.</p>
+          <p>Cada conta tem o próprio navegador isolado, então as sessões e os cookies não se misturam.</p>
           <ul>
             <li>4 modos de janela: Abas, Grade, 1+N e Livre</li>
             <li>Arraste para reordenar; mute por conta</li>
-            <li>Mostra a memória de cada conta e recarrega a que passar do limite</li>
-            <li>Vai para a bandeja e pode iniciar com o Windows</li>
+            <li>Tema Arcade ou Escuro, e zoom por perfil</li>
           </ul>
         </article>
         <article class="card pixel-box c2">
-          <div class="ico" aria-hidden="true">🗳️</div>
-          <h3>Votar no TopIdle</h3>
-          <p>Um botão por conta abre a página de voto com a sessão daquela conta e mostra <strong>quanto falta</strong> para votar de novo. Fica amarelo quando já dá. Você vota; o app não clica por você.</p>
+          <div class="ico" aria-hidden="true">🎮</div>
+          <h3>Um perfil por jogo</h3>
+          <p>Crie um perfil para cada jogo web, cada um com a sua lista de contas, o seu limite de contas e as suas janelas.</p>
         </article>
         <article class="card pixel-box c3">
-          <div class="ico" aria-hidden="true">📺</div>
-          <h3>Bônus de live da Twitch</h3>
-          <p>Cada conta fica presente no chat dos canais de bônus <strong>sem você abrir nenhuma live</strong> e sem gastar a memória de um navegador por canal.</p>
+          <div class="ico" aria-hidden="true">🔐</div>
+          <h3>Cofre de senhas opcional</h3>
+          <p>Criptografado no seu PC, com o seu usuário do Windows ou uma senha mestra. Login automático opcional. Para contas Google, o app nunca digita a sua senha.</p>
         </article>
         <article class="card pixel-box c4">
-          <div class="ico" aria-hidden="true">📈</div>
-          <h3>/hunt<span class="tag">XP e ouro</span></h3>
-          <p>Para o Pokémon em campo de cada conta, mostra as melhores hunts por <strong>XP/h</strong> e por <strong>ouro/h líquido</strong>, com o risco de cada uma. Usa as fórmulas do próprio jogo, ao vivo, e entende o dia sazonal.</p>
-        </article>
-        <article class="card pixel-box c5">
-          <div class="ico" aria-hidden="true">🎯</div>
-          <h3>Sniper do mercado</h3>
-          <p>Compra em segundo plano o que bate com as suas regras.</p>
+          <div class="ico" aria-hidden="true">🧠</div>
+          <h3>Leve e sob controle</h3>
           <ul>
-            <li>Até 15 regras por conta, com teto em coins e em gemas</li>
-            <li>Radar de shiny, P5 e nota mínima</li>
-            <li>Reserva de saldo que nunca é gasta</li>
-            <li>Respeita a retenção e o sorteio do mercado</li>
+            <li>Mostra a memória de cada conta e recarrega a que passar do limite</li>
+            <li>Bloqueio de anúncios e rastreadores por lista de domínios</li>
+            <li>Vai para a bandeja e pode iniciar com o Windows</li>
+            <li>Atualiza sozinho, baixando só o que mudou</li>
           </ul>
-        </article>
-        <article class="card pixel-box c6">
-          <div class="ico" aria-hidden="true">🔄</div>
-          <h3>Atualiza sozinho</h3>
-          <p>O app confere versões novas ao abrir e de hora em hora, avisa e atualiza com um clique, baixando só o que mudou.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section id="telas" class="band">
+  <section id="jogos" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Jogos com suporte personalizado</h2>
+        <p class="lead">Além do básico, alguns jogos ganham ferramentas feitas sob medida. Começamos por um e vamos criar mais conforme as necessidades.</p>
+      </div>
+      <div class="grid games">
+        <article class="card pixel-box c5">
+          <div class="ico" aria-hidden="true">⚡</div>
+          <h3>pokeidle.io<span class="tag">Disponível</span></h3>
+          <ul>
+            <li><strong>Voto no TopIdle:</strong> um botão por conta que mostra quanto falta para votar de novo. Você vota; o app não clica por você.</li>
+            <li><strong>Bônus de live da Twitch:</strong> cada conta presente no chat dos canais de bônus, sem abrir nenhuma live.</li>
+            <li><strong>/hunt:</strong> a melhor hunt de cada conta por XP/h e ouro/h líquido, com as fórmulas do próprio jogo, ao vivo.</li>
+            <li><strong>Sniper do mercado:</strong> compra em segundo plano o que bate com as suas regras, com radar de shiny, P5 e nota, e reserva de saldo.</li>
+          </ul>
+        </article>
+        <article class="card pixel-box dashed">
+          <div class="ico" aria-hidden="true">➕</div>
+          <h3>O seu jogo aqui</h3>
+          <p>Joga outro jogo idle e sente falta de alguma ferramenta? Conte qual jogo e o que faria diferença para você. As próximas ferramentas nascem desses pedidos.</p>
+          <div class="cta" style="margin:6px 0 0">
+            <a class="btn btn-secondary btn-small" href="https://github.com/PatrickKenji/BookIdle-releases/discussions">Pedir um jogo</a>
+          </div>
+        </article>
+      </div>
+      <p class="fineprint" style="margin-top:22px">O BookIdle é independente e não tem nenhum vínculo com o pokeidle.io nem com os outros jogos: ele só automatiza o que você faria na mão, no seu computador, e cada jogo tem as suas próprias regras.</p>
+    </div>
+  </section>
+
+  <section id="telas">
     <div class="wrap">
       <div class="section-head">
         <h2>Como é por dentro</h2>
-        <p class="lead">Capturas com dados de exemplo. Clique para ampliar.</p>
+        <p class="lead">As ferramentas do pokeidle.io, com dados de exemplo. Clique para ampliar.</p>
       </div>
       <div class="shots">
         <figure>
@@ -275,7 +297,7 @@ footer { border-top: 3px solid var(--outline); background: var(--side); padding-
     </div>
   </section>
 
-  <section id="privacidade">
+  <section id="privacidade" class="band">
     <div class="wrap two">
       <div>
         <div class="section-head">
@@ -291,9 +313,9 @@ footer { border-top: 3px solid var(--outline); background: var(--side); padding-
       </div>
       <div class="pixel-box" style="padding:24px">
         <h3 style="margin-bottom:14px;color:var(--yellow)">Com quem o app conversa</h3>
-        <p class="muted" style="margin:0 0 14px">Só com estes endereços, e você pode conferir no código:</p>
+        <p class="muted" style="margin:0 0 14px">Além dos sites dos jogos que você abrir, só com estes endereços, e você pode conferir no código:</p>
         <div class="code-box pixel-box">
-pokeidle.io<span class="c">   · o jogo e a lista de itens</span><br>
+pokeidle.io<span class="c">   · lista de itens (ferramentas dele)</span><br>
 topidle.com<span class="c">   · a página de voto</span><br>
 twitch.tv<span class="c">     · só se você conectar a Twitch</span><br>
 github.com<span class="c">    · conferir e baixar atualizações</span><br>
@@ -303,7 +325,7 @@ livepix.gg<span class="c">    · só se você clicar em Apoiar</span>
     </div>
   </section>
 
-  <section id="codigo-aberto" class="band">
+  <section id="codigo-aberto">
     <div class="wrap two">
       <div>
         <div class="section-head">
@@ -323,7 +345,7 @@ livepix.gg<span class="c">    · só se você clicar em Apoiar</span>
     </div>
   </section>
 
-  <section id="instalar">
+  <section id="instalar" class="band">
     <div class="wrap">
       <div class="section-head">
         <h2>Como instalar</h2>
@@ -344,24 +366,24 @@ livepix.gg<span class="c">    · só se você clicar em Apoiar</span>
     </div>
   </section>
 
-  <section id="faq" class="band">
+  <section id="faq">
     <div class="wrap">
       <div class="section-head"><h2>Dúvidas</h2></div>
       <details class="pixel-box">
-        <summary>É oficial? Vocês têm ligação com o pokeidle.io?</summary>
-        <p>Não. O BookIdle é um projeto independente, sem ligação com o pokeidle.io, o TopIdle, a Twitch, a Nintendo ou a The Pokémon Company. Todas as marcas são dos respectivos donos.</p>
+        <summary>É oficial? Vocês têm ligação com algum jogo?</summary>
+        <p>Não. O BookIdle é um projeto independente, <strong>sem nenhum vínculo com o pokeidle.io</strong> nem com os outros jogos que você abrir nele, e sem ligação com o TopIdle, a Twitch, a Nintendo ou a The Pokémon Company. Todas as marcas são dos respectivos donos.</p>
       </details>
       <details class="pixel-box">
         <summary>Posso ser banido por usar?</summary>
-        <p>O jogo permite automação que siga as mesmas regras de quem joga na mão, e o sniper foi feito assim. Mas <strong>o limite de contas é seu</strong>: o pokeidle.io permite hoje 4 contas por pessoa, somando todos os computadores e redes. Leia os termos do jogo; você é responsável pelo uso.</p>
+        <p>Cada jogo tem as suas regras, e <strong>você é responsável por segui-las</strong>, inclusive o limite de contas por pessoa. No pokeidle.io, único com ferramentas automáticas hoje, o jogo permite automação que siga as mesmas regras de quem joga na mão e hoje limita a 4 contas por pessoa, somando todos os computadores e redes. Leia os termos do jogo que você usa.</p>
       </details>
       <details class="pixel-box">
-        <summary>O sniper gasta moedas de verdade?</summary>
+        <summary>O sniper do pokeidle.io gasta moedas de verdade?</summary>
         <p>Sim, gasta coins e gemas do jogo. Comece com regras pequenas e uma reserva de saldo alta, e acompanhe o feed de eventos. Uma compra feita não é desfeita pelo jogo.</p>
       </details>
       <details class="pixel-box">
-        <summary>Funciona para outros jogos idle?</summary>
-        <p>O BookIdle abre qualquer jogo web em perfis separados, então já serve como gerenciador de várias contas. Mas as ferramentas especiais (voto, hunts, sniper, Twitch) são só do pokeidle.io. <a href="https://github.com/PatrickKenji/BookIdle-releases/discussions">Conte qual jogo você quer</a> e vamos avaliar.</p>
+        <summary>Funciona com outros jogos idle?</summary>
+        <p>Sim: o BookIdle abre qualquer jogo de navegador em perfis separados e já serve como gerenciador de várias contas. As ferramentas personalizadas (voto, hunts, sniper, Twitch) existem hoje só para o pokeidle.io, e novas são criadas conforme a necessidade. <a href="https://github.com/PatrickKenji/BookIdle-releases/discussions">Conte qual jogo você quer</a>.</p>
       </details>
       <details class="pixel-box">
         <summary>Tem custo? Como ajudar?</summary>
@@ -380,7 +402,7 @@ livepix.gg<span class="c">    · só se você clicar em Apoiar</span>
       <a href="https://github.com/PatrickKenji/BookIdle-releases/blob/main/LICENSE">Licença MIT</a>
       <a href="https://livepix.gg/tickelicia">♥ Apoiar</a>
     </div>
-    <small>© 2026 Tickelicia. BookIdle é software livre (MIT), fornecido "como está", sem garantias. Projeto não oficial: não tem ligação com o pokeidle.io, o TopIdle, a Twitch, a Nintendo ou a The Pokémon Company; todas as marcas pertencem aos seus donos. Fontes Press Start 2P e Space Grotesk sob licença OFL.</small>
+    <small>© 2026 Tickelicia. BookIdle é software livre (MIT), fornecido "como está", sem garantias. Projeto independente: não tem nenhum vínculo com o pokeidle.io nem com os outros jogos abertos nele, nem com o TopIdle, a Twitch, a Nintendo ou a The Pokémon Company; todas as marcas pertencem aos seus donos. Fontes Press Start 2P e Space Grotesk sob licença OFL.</small>
   </div>
 </footer>
 </body>

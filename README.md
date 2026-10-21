@@ -1,7 +1,7 @@
 # BookIdle — site
 
-Página de apresentação do [BookIdle](https://github.com/PatrickKenji/BookIdle-releases), gerenciador de contas e ferramentas
-para o pokeidle.io (gratuito e de código aberto).
+Página de apresentação do [BookIdle](https://github.com/PatrickKenji/BookIdle-releases), gerenciador de contas
+para jogos idle, com ferramentas personalizadas por jogo (gratuito e de código aberto).
 
 Site estático, sem build: `index.html` + `fonts/` + `img/`. Para ver localmente:
 
